@@ -302,8 +302,8 @@ function flattenArray(nestedArray) {
  *   selectMany([[1, 2], [3, 4], [5, 6]], (x) => x) =>   [ 1, 2, 3, 4, 5, 6 ]
  *   selectMany(['one','two','three'], (x) => x.split('')) =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
-function selectMany(/* arr, childrenSelector */) {
-  throw new Error('Not implemented');
+function selectMany(arr, childrenSelector) {
+  return arr.flatMap(childrenSelector);
 }
 
 /**
@@ -351,8 +351,8 @@ function createChunks(/* arr, chunkSize */) {
  *    generateOdds(2) => [ 1, 3 ]
  *    generateOdds(5) => [ 1, 3, 5, 7, 9 ]
  */
-function generateOdds(/* len */) {
-  throw new Error('Not implemented');
+function generateOdds(len) {
+  return len === 0 ? [] : Array.from({ length: len }, (_, i) => 1 + i * 2);
 }
 
 /**
@@ -383,8 +383,8 @@ function getElementByIndices(/* arr, indices */) {
  *  getFalsyValuesCount([ -1, 'false', null, 0 ]) => 2
  *  getFalsyValuesCount([ null, undefined, NaN, false, 0, '' ]) => 6
  */
-function getFalsyValuesCount(/* arr */) {
-  throw new Error('Not implemented');
+function getFalsyValuesCount(arr) {
+  return arr.filter((e) => !e).length;
 }
 
 /**
@@ -413,15 +413,17 @@ function getIdentityMatrix(/* n */) {
  * Returns an array containing indices of odd elements in the input array.
  *
  * @param {array} numbers - The array of numbers.
- * @return {array} - An array containing indices of odd elements.
+ * @return {void} - An array containing indices of odd elements.
  *
  * @example
  *    getIndicesOfOddNumbers([1, 2, 3, 4, 5]) => [0, 2, 4]
  *    getIndicesOfOddNumbers([2, 4, 6, 8, 10]) => []
  *    getIndicesOfOddNumbers([11, 22, 33, 44, 55]) => [0, 2, 4]
  */
-function getIndicesOfOddNumbers(/* numbers */) {
-  throw new Error('Not implemented');
+function getIndicesOfOddNumbers(numbers) {
+  const res = [];
+  numbers.map((value, index) => (value % 2 === 0 ? value : res.push(index)));
+  return res;
 }
 
 /**
