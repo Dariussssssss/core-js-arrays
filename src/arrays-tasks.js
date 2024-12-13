@@ -336,11 +336,12 @@ function calculateBalance(arr) {
  *    createChunks([10, 20, 30, 40, 50], 1) => [[10], [20], [30], [40], [50]]
  */
 function createChunks(arr, chunkSize) {
-  const result = [];
-  for (let i = 0; i < arr.length; i += chunkSize) {
-    result.push(arr.slice(i, i + chunkSize));
-  }
-  return result;
+  return arr.reduce((res, item, i) => {
+    if (i % chunkSize === 0) {
+      res.push(arr.slice(i, i + chunkSize));
+    }
+    return res;
+  }, []);
 }
 
 /**
@@ -414,14 +415,11 @@ function getFalsyValuesCount(arr) {
  *                              [0,0,0,0,1]]
  */
 function getIdentityMatrix(n) {
-  const matrix = [];
-  const arr = Array(n).fill(0);
-  for (let i = 0; i < n; i += 1) {
-    const temp = [...arr];
-    temp[i] = 1;
-    matrix.push(temp);
-  }
-  return matrix;
+  return new Array(n)
+    .fill(0)
+    .map((_, row) =>
+      new Array(n).fill(0).map((e, col) => (row === col ? 1 : 0))
+    );
 }
 
 /**
@@ -489,8 +487,8 @@ function getMaxItems(arr, n) {
  *    findCommonElements(['a', 'b', 'c'], ['b', 'c', 'd']) => [ 'b', 'c' ]
  *    findCommonElements([1, 2, 3], ['a', 'b', 'c']) => []
  */
-function findCommonElements(/* arr1, arr2 */) {
-  throw new Error('Not implemented');
+function findCommonElements(arr1, arr2) {
+  return arr1.filter((e) => arr2.includes(e));
 }
 
 /**
